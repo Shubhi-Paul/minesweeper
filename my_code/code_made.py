@@ -106,10 +106,9 @@ def game(n,k):
         while True:
             if check_won(n,player_map)==False:
                 print('Enter the cell u want to open :' )
-                print ("Enter value X (1 to",n,")")
-                x = int(input("X :"))
+                print ("Enter value X and Y (1 to",n,")")
+                x = int(input("X : "))
                 x -= 1
-                print ("Enter value Y (1 to",n,")")
                 y = int(input("Y : "))
                 y -= 1
 
@@ -131,6 +130,35 @@ def game(n,k):
                 GameStatus = cont_game(n,score)
                 break
 
+def grid_size():
+    print("GRID SIZE AVAILABE \n1. 10x10 \n2. 15x15")
+    grid= int(input('\nChoose grid size (1/2) : '))
+    if grid == 1:
+        n = 10
+    elif grid == 2:
+        n = 15
+    else:
+        print('Choosen option unavailable. TIP: CHOOSE CORRECTLY !')
+        grid_size()
+    return n
+
+def difficulty():
+    print("DIFICULTY LEVELS AVAILABLE \n1. Easy \n2. Medium \n3. Hard \n4. Very Hard")
+    diff= int(input('\nChoose grid size (1/2/3/4) : '))
+    if diff == 1:
+        k = 5
+    elif diff == 2:
+        k = 10
+    elif diff == 3:
+        k = 15
+    elif diff == 4:
+        k = 20
+    else:
+        print('Choosen option unavailable. TIP: CHOOSE CORRECTLY !')
+        difficulty()
+    return k
+        
+
 #game_end_____________________________________________________________________________________________
 
 #__main__
@@ -139,7 +167,10 @@ def game(n,k):
 if __name__ == "__main__":
     try:
         print("Welcome to MineSweeper :)\n")
-        #ask difficulty
-        game(10,10) #game(matrix,difficulty)
+        n = grid_size()
+        print()
+        k = difficulty()
+        os.system("cls")
+        game(n,k) #game(matrix,difficulty)
     except KeyboardInterrupt:
         print('\nEnd of Game. Bye Bye!')
