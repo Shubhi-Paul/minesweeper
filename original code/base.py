@@ -18,7 +18,6 @@ def minesweeper(n):
     '''for row in arr:
         for cell in row:
             print(cell, end = ' ')
-            #print('#'.join(str(cell) for cell in row))
         print()
         print()'''
 
