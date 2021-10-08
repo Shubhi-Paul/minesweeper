@@ -21,7 +21,7 @@ def CheckContinueGame(score):
         return False
     return True
 
-def Game():
+def Game(n,k):
 
     GameStatus = True
     while GameStatus: 

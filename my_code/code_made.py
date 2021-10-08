@@ -2,13 +2,14 @@ from random import randint
 
 #base_structure_start___________________________________________________________________________________
 
-def base_grid(n):
+def base_grid(n,k):
 
     """create the background grid as the basic str of the game"""
 
     map=[[0 for row in range(n)] for column in range(n)]
     
-    add_bombs(map,n)
+    add_bombs(map,n,k)
+    return map
     
 
 def print_grid(map):
@@ -25,7 +26,7 @@ def print_grid(map):
         print()
         
 
-def add_bombs(map,n, k = 9):
+def add_bombs(map,n, k = 10):
 
     """
     add bombs randomly in the grid accoring to percentage.
@@ -78,7 +79,7 @@ def number(x,y,n,arr):
 #game_start___________________________________________________________________________________________
 def player_grid(n):
      map=[["-" for row in range(n)] for column in range(n)]
-     print_grid(map)
+     return map
 
 def cont_game(n,score):
     print('your score is :', score,"/", n*n,'!!')
@@ -93,31 +94,35 @@ def check_won(n,map):
         for row in range(n):
             if map[row][column] == "-":
                 return False
-            else:
-                return True
+    return True
 
-def game(n):
-    while True:
-        mine_map=base_grid(n)
+def game(n,k):
+    Game_status = True
+    while Game_status:
+        mine_map=base_grid(n,k)
         player_map=player_grid(n)
         score = 0
         while True:
             if check_won(n,player_map)==False:
-                print('enter the cell u want to open :' )
-                x = int(input("X (1 to",n-1," : "))
+                print('Enter the cell u want to open :' )
+                print ("Enter value X (1 to",n-1)
+                x = int(input("X :"))
                 x -= 1
-                y = int(input("Y (1 to" , n-1 ,": "))
+                print ("Enter value Y (1 to",n-1)
+                y = int(input("Y : "))
                 y -= 1
 
                 if mine_map[x][y] == "X":
-                    cont_game(n,score)
+                    print("Game Over :(")
+                    print_grid(mine_map)
+                    Game_status = cont_game(score)
                     break
                 else:
                     player_map[x][y] = mine_map[x][y]
                     score += 1
                     print_grid(player_map)
             else:
-                DisplayMap(player_map)
+                print_grid(player_map)
                 print("You have Won!!")
                 GameStatus = cont_game(n,score)
                 break
@@ -129,6 +134,7 @@ def game(n):
 # Start of Program
 if __name__ == "__main__":
     try:
-        game(10)
+        #ask difficulty
+        game(10,10) #game(matrix,difficulty)
     except KeyboardInterrupt:
         print('\nEnd of Game. Bye Bye!')
