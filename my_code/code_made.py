@@ -105,10 +105,10 @@ def game(n,k):
         while True:
             if check_won(n,player_map)==False:
                 print('Enter the cell u want to open :' )
-                print ("Enter value X (1 to",n-1)
+                print ("Enter value X (1 to",n,")")
                 x = int(input("X :"))
                 x -= 1
-                print ("Enter value Y (1 to",n-1)
+                print ("Enter value Y (1 to",n,")")
                 y = int(input("Y : "))
                 y -= 1
 
