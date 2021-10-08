@@ -122,6 +122,7 @@ def game(n,k):
                 else:
                     player_map[x][y] = mine_map[x][y]
                     score += 1
+                    os.system("cls")
                     print_grid(player_map)
             else:
                 os.system("cls")
