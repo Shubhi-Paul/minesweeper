@@ -1,4 +1,4 @@
-# HACKTOBER FEST 2021
+# KONNICHIWA
 
 Hey budding coders (just like me), if u can add to my code i"ll be happy to accept your Pull Requests.
 The my_code folder is all hardwork of mine, SO EXCEPT THAT ONE , if you wanna add to the code in original_code folder go ahead.
