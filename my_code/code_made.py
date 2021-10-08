@@ -20,14 +20,32 @@ def print_grid(arr):
         print()
         print()
 
+
 def bomb(arr,n):
 
-    """add bombs randomly in the grid and update the numbers around it"""
+    """add bombs randomly in the grid """
     
     x=random.randint(0,n-1)
     y=random.randint(0,n-1)
     arr[x][y] = "x"
+    number(x,y,n,arr)
+
+def number(x,y,n,arr):
+    
+    """increment numbers around the bomb"""
+
+    if y == 0:
+        arr[x][y+1] = +1 #centre right
+    elif y == (n-1):
+        arr[x][y-1] = +1 #centre left
+    elif y > 0 and y < (n-1) :
+        arr[x][y+1] = +1 #centre right
+        arr[x][y-1] = +1 #centre left
+
+    
     print_grid(arr)
+
+
 
 
 
