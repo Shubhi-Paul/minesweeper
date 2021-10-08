@@ -1,4 +1,5 @@
 from random import randint
+import os
 
 #base_structure_start___________________________________________________________________________________
 
@@ -113,17 +114,19 @@ def game(n,k):
                 y -= 1
 
                 if mine_map[x][y] == "X":
+                    os.system("cls")
                     print("Game Over :(")
                     print_grid(mine_map)
-                    Game_status = cont_game(score)
+                    Game_status = cont_game(n,score)
                     break
                 else:
                     player_map[x][y] = mine_map[x][y]
                     score += 1
                     print_grid(player_map)
             else:
+                os.system("cls")
                 print_grid(player_map)
-                print("You have Won!!")
+                print("\nYou have Won!!")
                 GameStatus = cont_game(n,score)
                 break
 
