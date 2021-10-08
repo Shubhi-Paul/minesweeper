@@ -1,6 +1,5 @@
 from random import randint
 import os
-
 #base_structure_start___________________________________________________________________________________
 
 def base_grid(n,k):
@@ -20,9 +19,9 @@ def print_grid(map):
     for row in map:
         for cell in row:
             if cell == 0:
-                print("." , end = "  ")
+                print("." , end = "   ")
             else:
-                print(cell, end = '  ')
+                print(cell, end = '   ')
         print()
         print()
         
@@ -103,6 +102,7 @@ def game(n,k):
         mine_map=base_grid(n,k)
         player_map=player_grid(n)
         score = 0
+        print_grid(player_map)
         while True:
             if check_won(n,player_map)==False:
                 print('Enter the cell u want to open :' )
@@ -120,6 +120,7 @@ def game(n,k):
                     Game_status = cont_game(n,score)
                     break
                 else:
+                    os.system("cls")
                     player_map[x][y] = mine_map[x][y]
                     score += 1
                     print_grid(player_map)
@@ -137,6 +138,7 @@ def game(n,k):
 # Start of Program
 if __name__ == "__main__":
     try:
+        print("Welcome to MineSweeper :)\n")
         #ask difficulty
         game(10,10) #game(matrix,difficulty)
     except KeyboardInterrupt:
