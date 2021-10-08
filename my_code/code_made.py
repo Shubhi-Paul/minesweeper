@@ -27,7 +27,7 @@ def bomb(arr,n):
     
     x=random.randint(0,n-1)
     y=random.randint(0,n-1)
-    arr[x][y] = "x"
+    arr[x][y] = "X"
     number(x,y,n,arr)
 
 def number(x,y,n,arr):
@@ -41,6 +41,28 @@ def number(x,y,n,arr):
     elif y > 0 and y < (n-1) :
         arr[x][y+1] = +1 #centre right
         arr[x][y-1] = +1 #centre left
+
+    if x < (n-1) and ( y > 0 and y < (n-1)):
+         arr[x+1][y+1] = +1 #bottom right
+         arr[x+1][y-1] = +1 #bottom left
+         arr[x+1][y] = +1 #bottom centre
+    elif  x < (n-1) and y == 0:
+        arr[x+1][y+1] = +1 #bottom right
+        arr[x+1][y] = +1 #bottom centre
+    elif x < (n-1) and y == (n-1):
+        arr[x+1][y-1] = +1 #bottom left
+        arr[x+1][y] = +1 #bottom centre
+
+    if x > 0 and ( y > 0 and y < (n-1)):
+         arr[x-1][y+1] = +1 #top right
+         arr[x-1][y-1] = +1 #top left
+         arr[x-1][y] = +1 #top centre
+    elif  x > 0 and y == 0:
+        arr[x-1][y+1] = +1 #top right
+        arr[x-1][y] = +1 #top centre
+    elif x > 0 and y == (n-1):
+        arr[x-1][y-1] = +1 #top left
+        arr[x-1][y] = +1 #top centre
 
     
     print_grid(arr)
