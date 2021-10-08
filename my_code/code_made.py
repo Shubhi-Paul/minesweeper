@@ -6,25 +6,26 @@ def base_grid(n):
 
     """create the background grid as the basic str of the game"""
 
-    arr=[[0 for row in range(n)] for column in range(n)]
+    map=[[0 for row in range(n)] for column in range(n)]
     
-    add_bombs(arr,n)
+    add_bombs(map,n)
     
 
-def print_grid(arr):
+def print_grid(map):
 
-    """prints the grid with bombs and numbers"""
+    """ prints the grids """
 
-    for row in arr:
+    for row in map:
         for cell in row:
             if cell == 0:
                 print("." , end = "  ")
             else:
                 print(cell, end = '  ')
         print()
+        print()
         
 
-def add_bombs(arr,n, k = 9):
+def add_bombs(map,n, k = 9):
 
     """
     add bombs randomly in the grid accoring to percentage.
@@ -37,10 +38,9 @@ def add_bombs(arr,n, k = 9):
     for column in range(n):
         for row in range(n):
             if randint(1,100) < k:
-                arr[row][column] = "X"
-                number(row,column,n,arr)
-
-    print_grid(arr)       
+                map[row][column] = "X"
+                number(row,column,n,map)
+       
 
 def number(x,y,n,arr):
     
@@ -72,16 +72,63 @@ def number(x,y,n,arr):
     if x > 0 :
         if arr[x-1][y] != 'X':
             arr[x-1][y] += 1 #top centre
-    
-    
-    
-
 
 #base_structure_end___________________________________________________________________________________
 
+#game_start___________________________________________________________________________________________
+def player_grid(n):
+     map=[["-" for row in range(n)] for column in range(n)]
+     print_grid(map)
+
+def cont_game(n,score):
+    print('your score is :', score,"/", n*n,'!!')
+    again = input("\n\nWant to play again (y/n) ? : ")
+    if again == "y":
+        game()
+    else:
+        input('press any key to quit')
+
+def check_won(n,map):
+    for column in range(n):
+        for row in range(n):
+            if map[row][column] == "-":
+                return False
+            else:
+                return True
+
+def game(n):
+    while True:
+        mine_map=base_grid(n)
+        player_map=player_grid(n)
+        score = 0
+        while True:
+            if check_won(n,player_map)==False:
+                print('enter the cell u want to open :' )
+                x = int(input("X (1 to",n-1," : "))
+                x -= 1
+                y = int(input("Y (1 to" , n-1 ,": "))
+                y -= 1
+
+                if mine_map[x][y] == "X":
+                    cont_game(n,score)
+                    break
+                else:
+                    player_map[x][y] = mine_map[x][y]
+                    score += 1
+                    print_grid(player_map)
+            else:
+                DisplayMap(player_map)
+                print("You have Won!!")
+                GameStatus = cont_game(n,score)
+                break
+
+#game_end_____________________________________________________________________________________________
 
 #__main__
 
-base_grid(25)
-
-input("press any key... ")
+# Start of Program
+if __name__ == "__main__":
+    try:
+        game(10)
+    except KeyboardInterrupt:
+        print('\nEnd of Game. Bye Bye!')
