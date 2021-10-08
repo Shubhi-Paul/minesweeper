@@ -1,5 +1,8 @@
 import random
 def minesweeper(n):
+    
+    """add bombs randomly in the grid and update the numbers around it"""
+
     arr = [[0 for row in range(n)] for column in range(n)]
     x = random.randint(0,4)
     y = random.randint(0,4)
