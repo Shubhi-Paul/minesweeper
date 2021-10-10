@@ -76,13 +76,14 @@ def number(x,y,n,arr):
 
 #open_empty_cells_together____________________________________________________________________________
 def display_null(x,y,n,mine_map,player_map,score):
+    mine_map[x][y] = " "
     if x>0 :
         if mine_map[x-1][y] == "0":
-            player_map[x-1][y]=mine_map[x-1][y-1]
+            player_map[x-1][y]=mine_map[x-1][y]
             display_null(x-1,y,n,mine_map,player_map) #left
             score += 1
-        else:
-            player_map[x-1][y]=mine_map[x-1][y-1]
+        elif mine_map[x-1][y] != " ":
+            player_map[x-1][y]=mine_map[x-1][y]
             score += 1
     
     if x> 0 and y>0:
@@ -90,60 +91,60 @@ def display_null(x,y,n,mine_map,player_map,score):
             player_map[x-1][y-1]=mine_map[x-1][y-1]
             display_null(x-1,y-1,n,mine_map,player_map) #top left
             score += 1
-        else:
+        elif mine_map[x-1][y-1] != " ":
             player_map[x-1][y-1]=mine_map[x-1][y-1]
             score += 1
     
     if x > 0 and y < n-1:
-        if mine_map[x-1][y-1] == "0":
-            player_map[x-1][y-1]=mine_map[x-1][y-1]
-            display_null(x-1,y-1,n,mine_map,player_map) #bottom left
-        else:
-            player_map[x-1][y-1]=mine_map[x-1][y-1]
+        if mine_map[x-1][y+1] == "0":
+            player_map[x-1][y+1]=mine_map[x-1][y+1]
+            display_null(x-1,y+1,n,mine_map,player_map) #bottom left
+        if mine_map[x-1][y+1] != " ":
+            player_map[x-1][y+1]=mine_map[x-1][y+1]
 
     if x < n-1 :
         if mine_map[x+1][y] == "0":
-            player_map[x+1][y]=mine_map[x-1][y-1]
+            player_map[x+1][y]=mine_map[x+1][y]
             display_null(x+1,y,n,mine_map,player_map) #right
             score += 1
-        else:
-            player_map[x+1][y]=mine_map[x-1][y-1]
+        elif mine_map[x+1][y] != " ":
+            player_map[x+1][y]=mine_map[x+1][y]
             score += 1
     
-    if x < n-1 and y>0:
+    if x < n-1 and y >0:
         if mine_map[x+1][y-1] == "0":
-            player_map[x+1][y-1]=mine_map[x-1][y-1]
+            player_map[x+1][y-1]=mine_map[x+1][y-1]
             display_null(x+1,y-1,n,mine_map,player_map) #top right
             score += 1
-        else:
-            player_map[x+1][y-1]=mine_map[x-1][y-1]
+        elif mine_map[x+1][y-1] != " ":
+            player_map[x+1][y-1]=mine_map[x+1][y-1]
             score += 1
     
     if x < n-1 and y < n-1:
-        if mine_map[x+1][y-1] == "0":
-            player_map[x+1][y-1]=mine_map[x-1][y-1]
-            display_null(x+1,y-1,n,mine_map,player_map) #bottom right
+        if mine_map[x+1][y+1] == "0":
+            player_map[x+1][y+1]=mine_map[x+1][y+1]
+            display_null(x+1,y+1,n,mine_map,player_map) #bottom right
             score += 1
-        else:
-            player_map[x+1][y-1]=mine_map[x-1][y-1]
+        elif mine_map[x+1][y+1] != " ":
+            player_map[x+1][y+1]=mine_map[x+1][y+1]
             score += 1
     
     if y > 0:
         if mine_map[x][y-1] == "0":
-            player_map[x][y-1]=mine_map[x-1][y-1]
+            player_map[x][y-1]=mine_map[x][y-1]
             display_null(x,y-1,n,mine_map,player_map) #top
             score += 1
-        else:
-           player_map[x][y-1]=mine_map[x-1][y-1]
+        if mine_map[x][y-1] != " ":
+           player_map[x][y-1]=mine_map[x][y-1]
            score += 1
     
     if y < n-1:
         if mine_map[x][y+1] == "0":
-            player_map[x][y+1]=mine_map[x-1][y-1]
+            player_map[x][y+1]=mine_map[x][y+1]
             display_null(x,y+1,n,mine_map,player_map) #bottom
             score += 1
-        else:
-           player_map[x][y+1]=mine_map[x-1][y-1]
+        elif mine_map[x][y+1] != " ":
+           player_map[x][y+1]=mine_map[x][y+1]
            score += 1
 
 
@@ -192,6 +193,7 @@ def game(n,k):
                     break
                 
                 elif mine_map[x][y] == '0':
+                    player_map[x][y] = mine_map[x][y]
                     display_null(x,y,n,mine_map,player_map,score)
                     os.system("cls")
                     print_grid(player_map)
