@@ -16,12 +16,16 @@ def print_grid(map):
 
     """ prints the grids """
 
+    n=1 
+
     for row in map:
         for cell in row:
             if cell == 0:
+                
                 print("." , end = "   ")
             else:
-                print(cell, end = '   ')
+                print(n, end = "  ")
+               
         print()
         print()
         
@@ -164,7 +168,9 @@ def cont_game(n,score):
     if again == 'n':
         input('\nPress any key to exit....')
         return False
-    return True
+    else:
+        os.system("cls")
+        return True
 
 def check_won(n,map):
     for column in range(n):
@@ -177,7 +183,6 @@ def game(n,k):
     Game_status = True
     while Game_status:
         mine_map=base_grid(n,k)
-        print(mine_map)
         player_map=player_grid(n)
         score = 0
         print_grid(player_map)
@@ -232,13 +237,13 @@ def difficulty():
     print("DIFICULTY LEVELS AVAILABLE \n1. Easy \n2. Medium \n3. Hard \n4. Very Hard")
     diff= int(input('\nChoose grid size (1/2/3/4) : '))
     if diff == 1:
-        k = 5
-    elif diff == 2:
         k = 10
-    elif diff == 3:
+    elif diff == 2:
         k = 15
-    elif diff == 4:
+    elif diff == 3:
         k = 20
+    elif diff == 4:
+        k = 25
     else:
         print('Choosen option unavailable. TIP: CHOOSE CORRECTLY !')
         difficulty()
