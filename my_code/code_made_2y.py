@@ -78,77 +78,80 @@ def number(x,y,n,arr):
 def display_null(x,y,n,mine_map,player_map,score):
     mine_map[x][y] = " "
     if x>0 :
-        if mine_map[x-1][y] == "0":
+        if mine_map[x-1][y] == 0:
             player_map[x-1][y]=mine_map[x-1][y]
-            display_null(x-1,y,n,mine_map,player_map) #left
+            score +=1
+            display_null(x-1,y,n,mine_map,player_map,score) #left
             score += 1
         elif mine_map[x-1][y] != " ":
             player_map[x-1][y]=mine_map[x-1][y]
             score += 1
     
     if x> 0 and y>0:
-        if mine_map[x-1][y-1] == "0":
+        if mine_map[x-1][y-1] == 0:
             player_map[x-1][y-1]=mine_map[x-1][y-1]
-            display_null(x-1,y-1,n,mine_map,player_map) #top left
-            score += 1
+            score +=1        
+            display_null(x-1,y-1,n,mine_map,player_map,score) #top left
         elif mine_map[x-1][y-1] != " ":
             player_map[x-1][y-1]=mine_map[x-1][y-1]
             score += 1
     
     if x > 0 and y < n-1:
-        if mine_map[x-1][y+1] == "0":
+        if mine_map[x-1][y+1] == 0:
             player_map[x-1][y+1]=mine_map[x-1][y+1]
-            display_null(x-1,y+1,n,mine_map,player_map) #bottom left
+            score += 1
+            display_null(x-1,y+1,n,mine_map,player_map,score) #bottom left
         if mine_map[x-1][y+1] != " ":
             player_map[x-1][y+1]=mine_map[x-1][y+1]
+            score += 1
 
     if x < n-1 :
-        if mine_map[x+1][y] == "0":
+        if mine_map[x+1][y] == 0:
             player_map[x+1][y]=mine_map[x+1][y]
-            display_null(x+1,y,n,mine_map,player_map) #right
             score += 1
+            display_null(x+1,y,n,mine_map,player_map,score) #right
         elif mine_map[x+1][y] != " ":
             player_map[x+1][y]=mine_map[x+1][y]
             score += 1
     
     if x < n-1 and y >0:
-        if mine_map[x+1][y-1] == "0":
+        if mine_map[x+1][y-1] == 0:
             player_map[x+1][y-1]=mine_map[x+1][y-1]
-            display_null(x+1,y-1,n,mine_map,player_map) #top right
             score += 1
+            display_null(x+1,y-1,n,mine_map,player_map,score) #top right
         elif mine_map[x+1][y-1] != " ":
             player_map[x+1][y-1]=mine_map[x+1][y-1]
             score += 1
     
     if x < n-1 and y < n-1:
-        if mine_map[x+1][y+1] == "0":
+        if mine_map[x+1][y+1] == 0:
             player_map[x+1][y+1]=mine_map[x+1][y+1]
-            display_null(x+1,y+1,n,mine_map,player_map) #bottom right
             score += 1
+            display_null(x+1,y+1,n,mine_map,player_map,score) #bottom right
         elif mine_map[x+1][y+1] != " ":
             player_map[x+1][y+1]=mine_map[x+1][y+1]
             score += 1
     
     if y > 0:
-        if mine_map[x][y-1] == "0":
+        if mine_map[x][y-1] == 0:
             player_map[x][y-1]=mine_map[x][y-1]
-            display_null(x,y-1,n,mine_map,player_map) #top
             score += 1
-        if mine_map[x][y-1] != " ":
+            display_null(x,y-1,n,mine_map,player_map,score) #top
+        elif mine_map[x][y-1] != " ":
            player_map[x][y-1]=mine_map[x][y-1]
            score += 1
     
     if y < n-1:
-        if mine_map[x][y+1] == "0":
+        if mine_map[x][y+1] == 0:
             player_map[x][y+1]=mine_map[x][y+1]
-            display_null(x,y+1,n,mine_map,player_map) #bottom
             score += 1
+            display_null(x,y+1,n,mine_map,player_map,score) #bottom
         elif mine_map[x][y+1] != " ":
            player_map[x][y+1]=mine_map[x][y+1]
            score += 1
-
-
     
+    
+    return player_map , score
 
 #game_start___________________________________________________________________________________________
 def player_grid(n):
@@ -174,6 +177,7 @@ def game(n,k):
     Game_status = True
     while Game_status:
         mine_map=base_grid(n,k)
+        print(mine_map)
         player_map=player_grid(n)
         score = 0
         print_grid(player_map)
@@ -192,14 +196,15 @@ def game(n,k):
                     Game_status = cont_game(n,score)
                     break
                 
-                elif mine_map[x][y] == '0':
+                elif mine_map[x][y] == 0: #ITS NOT '0' STUPID BITCH!!
                     player_map[x][y] = mine_map[x][y]
-                    display_null(x,y,n,mine_map,player_map,score)
+                    player_map , score = display_null(x,y,n,mine_map,player_map,score)
                     os.system("cls")
                     print_grid(player_map)
                    
                 else:
                     os.system("cls")
+                    print(mine_map[x][y])
                     player_map[x][y] = mine_map[x][y]
                     score += 1
                     print_grid(player_map)
