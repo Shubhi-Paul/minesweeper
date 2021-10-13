@@ -14,17 +14,13 @@ def base_grid(n,k):
 
 def print_grid(map):
 
-    """ prints the grids """
-
-    n=1 
-
+    """ prints the grids """ 
     for row in map:
         for cell in row:
             if cell == 0:
-                
                 print("." , end = "   ")
             else:
-                print(n, end = "  ")
+                print(cell, end = "  ")
                
         print()
         print()
