@@ -18,7 +18,7 @@ def print_grid(map):
     for row in map:
         for cell in row:
             if cell == 0:
-                print("." , end = "   ")
+                print("." , end = "  ")
             else:
                 print(cell, end = "  ")
                
