@@ -1,3 +1,4 @@
+# open multiple cells which a cell with 0 value is clicked
 from random import randint
 import os
 #base_structure_start___________________________________________________________________________________
